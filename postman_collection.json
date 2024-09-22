@@ -1,0 +1,728 @@
+{
+	"info": {
+		"_postman_id": "4da5cb0f-c699-4a4d-9dbe-7a10e6a1102a",
+		"name": "INMO2.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34767015"
+	},
+	"item": [
+		{
+			"name": "sensors",
+			"item": [
+				{
+					"name": "Maintainance Sensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sensorId\": \"1\",\n  \"description\": \"This sensor measures temperature in the garage\",\n  \"serialNumber\": \"ABC123456789\",\n  \"brand\": \"Example Brand\",\n  \"serviceAddress\": \"123 Main St, City, Country\",\n  \"lastCheckDate\": \"2024-06-13T12:00:00Z\",\n  \"serviceType\": \"maintainance\",\n  \"observableProperties\": [\n    {\n      \"name\": \"temperature\",\n      \"path\": \"temperature.json\",\n      \"unitOfMeasure\": \"Celsius\",\n      \"alertRegex\": \"^[7-9]\\\\d{1,}$\", //greater than 60\n      \"maxValue\": 100,\n      \"minValue\": 1,\n      \"priority\": 5, //1-10\n      \"notify\": [\"ASD6cvQQaOtUIOu5aIB38A8qCSbK8L2\", \"ASDa6cvQQaOtUIOu5aIB38A8qCSbK8L2\"]\n      //notification receivers can be configured in runtime in the json file\n    },\n    {\n      \"name\": \"humidity\",\n      \"path\": \"humidity.json\",\n      \"unitOfMeasure\": \"Celsius\",\n      \"alertRegex\": \"^[89]\\\\d{1,}$\", //greater than 80\n      \"maxValue\": 100,\n      \"minValue\": 1,\n      \"priority\": 1, //1-10\n      \"notify\": [\"ASD6cvQQaOtUIOu5aIB38A8qCSbK8L2\", \"ASDa6cvQQaOtUIOu5aIB38A8qCSbK8L2\"]\n      //notification receivers can be configured in runtime in the json file\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sensors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Security Sensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sensorId\": \"2\",\n  \"description\": \"This sensor measures security in the garage\",\n  \"serialNumber\": \"ABC123456789\",\n  \"brand\": \"Example Brand\",\n  \"serviceAddress\": \"123 Main St, City, Country\",\n  \"lastCheckDate\": \"2024-06-13T12:00:00Z\",\n  \"serviceType\": \"security\",\n  \"observableProperties\": [\n    {\n      \"name\": \"presence\",\n      \"path\": \"presence.json\",\n      \"unitOfMeasure\": \"Bool\",\n      \"alertRegex\": \"1\",\n      \"priority\": 10, //1-10\n      \"notify\": [\"ASD6cvQQaOtUIOu5aIB38A8qCSbK8L2\", \"ASDa6cvQQaOtUIOu5aIB38A8qCSbK8L2\"]\n      //notification receivers can be configured in runtime in the json file\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sensors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sensors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign sensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"propertyId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sensors/1/assign",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sensors",
+								"1",
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sensorId\": \"2\",\n    \"presence\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sensors/signal",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sensors",
+								"signal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sensors/2/presence",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sensors",
+								"2",
+								"presence"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "properties",
+			"item": [
+				{
+					"name": "create property",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test Property",
+									"type": "text"
+								},
+								{
+									"key": "adults",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "doubleBeds",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "singleBeds",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "distanceToBeach",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "airConditioning",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "wifi",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "garage",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "house",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "State name",
+									"type": "text"
+								},
+								{
+									"key": "resort",
+									"value": "Resort Name",
+									"type": "text"
+								},
+								{
+									"key": "neighborhood",
+									"value": "Neighborhood Name",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/Users/mateogiraz/Downloads/01-01-A FILTERS (CAT C9 TIER 3).png"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/Users/mateogiraz/Downloads/01-01-A_FILTERS_(CAT_C9_TIER_3).png"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/Users/mateogiraz/Downloads/01-01-A_FILTERS_(CAT_C9_TIER_3) (3).png"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/Users/mateogiraz/Downloads/01-01-A FILTERS (CAT C9 TIER 3) (1).png"
+								},
+								{
+									"key": "country",
+									"value": "Brasil",
+									"type": "text"
+								},
+								{
+									"key": "costPerNight",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set availability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/properties/66746b92919111e90102b6d1/availability",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"properties",
+								"66746b92919111e90102b6d1",
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set unavailability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"2024-01-01T00:00:00.000Z\",\r\n  \"endDate\": \"2024-01-05T00:00:00.000Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/properties/66746b92919111e90102b6d1/unavailability",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"properties",
+								"66746b92919111e90102b6d1",
+								"unavailability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/properties/search?adults=2&children=1&wifi=true&startDate=2024-01-01&endDate=2024-01-30&page=1&limit=10\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"properties",
+								"search"
+							],
+							"query": [
+								{
+									"key": "adults",
+									"value": "2"
+								},
+								{
+									"key": "children",
+									"value": "1"
+								},
+								{
+									"key": "wifi",
+									"value": "true"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-01-30"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10\n"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reservations",
+			"item": [
+				{
+					"name": "cancel reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"mateogiraz27@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reservations/12/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservations",
+								"12",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pay reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"mateogiraz27@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reservations/12/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservations",
+								"12",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reservation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/reservations/12?email=mateogiraz27@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservations",
+								"12"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "mateogiraz27@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reservations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/reservations?page=1&limit=10&startDate=2023-07-01&endDate=2023-07-",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservations"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "startDate",
+									"value": "2023-07-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-07-"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create reservation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyId\": \"66746b92919111e90102b6d1\",\r\n  \"checkIn\": \"2024-01-01T00:00:00.000Z\",\r\n  \"checkOut\": \"2024-01-03T00:00:00.000Z\",\r\n  \"adults\": 2,\r\n  \"children\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reservations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"inquilino@gmail.com\",\r\n  \"password\": \"inquilino\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "policies",
+			"item": [
+				{
+					"name": "create by country",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"country\": \"Brasil\",\r\n  \"daysBefore\": 5,\r\n  \"refundPercentage\": 50\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cancellation-policies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cancellation-policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by country",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"daysBefore\": 7,\r\n  \"refundPercentage\": 75\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cancellation-policies/:country",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cancellation-policies",
+								":country"
+							],
+							"variable": [
+								{
+									"key": "country",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "create payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"propertyId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/payment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImRmOGIxNTFiY2Q5MGQ1YjMwMjBlNTNhMzYyZTRiMzA3NTYzMzdhNjEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaW5tby0yLTAiLCJhdWQiOiJpbm1vLTItMCIsImF1dGhfdGltZSI6MTcxODkyMTYxMiwidXNlcl9pZCI6IjZjdlFRYU90VUlPdTVhSUIzOEE4cUNTYks4TDIiLCJzdWIiOiI2Y3ZRUWFPdFVJT3U1YUlCMzhBOHFDU2JLOEwyIiwiaWF0IjoxNzE4OTIxNjEyLCJleHAiOjE3MTg5MjUyMTIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5pc3RyYWRvckBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HhnXhxNbVQgP5OGZnpKdrSJJr8kEqekmUguFfKzmH3c5wgYOiw0wVDpRJBO0ET6wym2t5oYlg3tTBBVUeRQUhT0STedVlmuZe1iriIc4bvVn1rB6v47LgI6IeIwX5XYR36o6TkiMU27GAGDwF_G_hD_QhCXTs50b0SYZpZ6c4LL4UULSeUx2eq_rh6s4RXyuTC0_LmV3i6t9UKPnpuuJZcfEHUGBenjVbPrrr1wEoKMjjyy5twtHGFLOVmjN5h_w_eWwOeETLqKoSf3wuN08bc33VNtO9VFTz1M47ezsM4mlvharcv_NVQE5P58tFkDxO2P0U5tvT3Ofh8McITzwnA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
